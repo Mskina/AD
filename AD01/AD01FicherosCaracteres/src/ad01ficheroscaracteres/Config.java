@@ -36,10 +36,11 @@ public class Config {
                 FileWriter fw = new FileWriter(arquivo);
                 BufferedWriter bw = new BufferedWriter(fw);) {
             for (String clave : mapa.keySet()) {
-                bw.write(String.format("%s=%s\n", clave, mapa.get(clave)));
+                bw.write(String.format("%s=%s", clave, mapa.get(clave)));
+                bw.newLine(); // Cada SO ten o seu propio carácter de nova liña. Así evitamos discordancias
             }
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            System.out.println("Oh :( Excepción: " + ioe.getMessage());;
         }
     }
 
@@ -55,11 +56,12 @@ public class Config {
     public String leerConfig(String rutaFichero, String clave) {
         String valor = null;
         File arquivo = new File(rutaFichero);
+        //boolean encontrado = false; --> Podemos finalizar a lectura cando atopamos.
         if (arquivo.exists()) {
-            
+
             String line;
             HashMap<String, String> mapa = new HashMap<String, String>();
-
+            // Non sería necesario crear mapa. Con line.split podemos usar só o array     
             try (
                     FileReader fr = new FileReader(arquivo);
                     BufferedReader br = new BufferedReader(fr);) {
