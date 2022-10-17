@@ -35,11 +35,11 @@ public class DataIOPersistencia implements IPersistencia {
             dos.writeUTF(persona.getNombre());
             dos.writeByte(persona.getEdad());
             dos.writeFloat(persona.getSalario());
-            System.out.println("Creada");
+            System.out.println("Escritura correcta.");
         } catch (FileNotFoundException ex) {
-            System.out.println(">> ERROR: No se ha encontrado el archivo");
+            System.out.println(">> ERROR DataIO: No se ha encontrado el archivo");
         } catch (IOException ex) {
-            System.out.println(">> ERROR E/S");
+            System.out.println(">> ERROR DataIO Escritura");
         }
     }
 
@@ -59,9 +59,9 @@ public class DataIOPersistencia implements IPersistencia {
             float salario = dis.readFloat();
             persona = new Persona(id, dni, nombre, edad, salario);
         } catch (FileNotFoundException ex) {
-            System.out.println(">> ERROR: No se ha encontrado el archivo");
+            System.out.println(">> ERROR DataIO: No se ha encontrado el archivo");
         } catch (IOException ex) {
-            System.out.println(">> ERROR E/S");
+            System.out.println(">> ERROR DataIO Lectura");
         }
         return persona;
     }

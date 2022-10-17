@@ -5,11 +5,13 @@
  */
 package ad.teis.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Iván Estévez Sabucedo
  */
-public class Persona {
+public class Persona implements Serializable {
 
     private long id;
     private String dni;
