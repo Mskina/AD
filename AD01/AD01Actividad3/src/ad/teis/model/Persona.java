@@ -18,6 +18,7 @@ public class Persona implements Serializable {
     private String nombre;
     private byte edad;
     private float salario;
+    private boolean borrado;
     
     public Persona(long id, String dni, String nombre, byte edad, float salario) {
         this.id = id;
@@ -25,6 +26,11 @@ public class Persona implements Serializable {
         this.nombre = nombre;
         this.edad = edad;
         this.salario = salario;
+    }
+    
+    public Persona(long id, String dni, String nombre, byte edad, float salario, boolean borrado) {
+        this(id, dni, nombre, edad, salario);
+        this.borrado = borrado;
     }
 
     /**
@@ -95,6 +101,20 @@ public class Persona implements Serializable {
      */
     public void setSalario(float salario) {
         this.salario = salario;
+    }
+
+    /**
+     * @return the borrado
+     */
+    public boolean isBorrado() {
+        return borrado;
+    }
+
+    /**
+     * @param borrado the borrado to set
+     */
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
     }
 
 }
