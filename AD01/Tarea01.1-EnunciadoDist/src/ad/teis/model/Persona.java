@@ -1,15 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ad01actividad5;
+package ad.teis.model;
 
 import java.io.Serializable;
 
 /**
- * Clase creada por profesora
- * @author Iván Estévez Sabucedo
+ *
+ * @author mfernandez
  */
 public class Persona implements Serializable {
 
@@ -20,9 +19,6 @@ public class Persona implements Serializable {
     private float salario; //4 bytes
     private boolean borrado; //1 byte
     //Total = 200 + 18+16+1  = 235
-    
-    public Persona () {        
-    }
 
     public Persona(long id, String dni, String nombre, int edad, float salario) {
         this.id = id;
@@ -82,7 +78,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Persona{" + "id=" + id + ", dni=" + dni + " , nombre=" + nombre + ", edad=" + edad + ", salario=" + salario + ", borrado=" + borrado + "}";
+        return "Persona{" + "id=" + id + ", dni=" + dni + " , nombre=" + ((nombre!=null)?nombre.trim():"null") + ", edad=" + edad + ", salario=" + salario + ", borrado=" + borrado +"}";
     }
 
 }
