@@ -4,11 +4,13 @@
  */
 package es.teis.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author maria
  */
-public class Partido{
+public class Partido implements Serializable { // Se implementa Serializable para poder exportar como .dat
     
     private long id;
     private String nombre;
