@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:bookshop xmlns:ns2="http://www.milibreria.com">
+    <listaLibro>
+        <libro isbn="978-0060554736">
+            <autor>Neil Strauss</autor>
+            <nombre>The Game</nombre>
+            <editorial>Harpercollins</editorial>
+        </libro>
+        <libro isbn="978-3832180577">
+            <autor>Charlotte Roche</autor>
+            <nombre>Feuchtgebiete</nombre>
+            <editorial>Dumont Buchverlag</editorial>
+        </libro>
+    </listaLibro>
+    <lugar>Barrio Obrero</lugar>
+    <nombre>Libreria sin limite</nombre>
+</ns2:bookshop>

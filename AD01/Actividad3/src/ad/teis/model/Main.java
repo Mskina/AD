@@ -5,9 +5,6 @@
  */
 package ad.teis.model;
 
-import ad.teis.persistencia.DataIOPersistencia;
-import ad.teis.persistencia.IPersistencia;
-import ad.teis.persistencia.ObjectPersistencia;
 import ad.teis.persistencia.RandomAccessPersistencia;
 import java.util.ArrayList;
 

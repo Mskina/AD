@@ -25,27 +25,28 @@ import javax.xml.stream.events.XMLEvent;
 public class EventReader {
 
     public static void main(String[] args) {
-        // primero crea un nuevo XMLInputFactory
+        // Primero crea un nuevo XMLInputFactory
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+        
         // Configura un nuevo eventReader a partir del fichero XML
         InputStream in = null;
+        
         try {
-
-          //He modificado la ruta para que funcione
-          //in = new FileInputStream("books.xml");
+            //He modificado la ruta para que funcione
+            //in = new FileInputStream("books.xml");
             in = new FileInputStream(Paths.get("src", "stax", "books.xml").toString());
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         }
+        
         try {
-
             XMLEventReader eventReader = inputFactory.createXMLEventReader(in); //input con i minúscula
-            // repetitiva que recorre todos los eventos
+            
+            // Repetitiva que recorre todos los eventos
             while (eventReader.hasNext()) {
                 XMLEvent event = eventReader.nextEvent();
                 // si el evento es el inicio del nodo titulo
-                // avanzo un evento para obtener el titulo del libro 
-                //Faltaba X al comienzo del código
+                // avanzo un evento para obtener el titulo del libro
                 if (event.getEventType() == XMLStreamConstants.START_ELEMENT) {
                     StartElement startElement = event.asStartElement();
                     //Cambiamos == por equals
@@ -57,7 +58,7 @@ public class EventReader {
                             QName name = attribute.getName();
                             String value = attribute.getValue();
                             //Faltaba name
-                            System.out.println("Atributo name/valor: " + name +"/" + value
+                            System.out.println("Atributo name/valor: " + name + "/" + value
                             );
                         }
                         event = eventReader.nextEvent();

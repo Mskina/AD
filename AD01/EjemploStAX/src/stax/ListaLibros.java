@@ -16,15 +16,16 @@ import javax.xml.stream.events.XMLEvent;
 public class ListaLibros {
 
     public static void main(String[] args) throws FileNotFoundException, XMLStreamException {
-// Creamos el flujo
+
+        // Creamos el flujo
         XMLInputFactory xmlif = XMLInputFactory.newInstance();
         XMLStreamReader xmlsr = xmlif.createXMLStreamReader(new FileReader(Paths.get("src", "stax", "books.xml").toString()));
         String tag = null;
         int eventType;
-        
-        
+
         System.out.println("Lista de libros");
-// iteramos con el cursor a lo largo del documento
+        
+        // Iteramos con el cursor a lo largo del documento
         while (xmlsr.hasNext()) {
             eventType = xmlsr.next();
             switch (eventType) {
@@ -35,9 +36,9 @@ public class ListaLibros {
 
                         String atLang = xmlsr.getAttributeValue(0);
                         String texto = xmlsr.getElementText();
-                        System.out.println(texto + " lang " + atLang); //cambio de idioma por lang, pero aún con 
-                        //excepción:
-//                        xception in thread "main" java.lang.IllegalStateException: Current state is not among the states START_ELEMENT , ATTRIBUTEvalid for getAttributeValue()
+                        System.out.println("Libro: " + texto + "; idioma: " + atLang); //cambio de idioma por lang, pero aún con 
+//      Exception:
+//      Exception in thread "main" java.lang.IllegalStateException: Current state is not among the states START_ELEMENT , ATTRIBUTEvalid for getAttributeValue()
 //	at com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.getAttributeValue(XMLStreamReaderImpl.java:802)
 //	at stax.ListaLibros.main(ListaLibros.java:32)
 

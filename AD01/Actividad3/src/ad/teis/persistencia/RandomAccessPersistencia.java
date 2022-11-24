@@ -297,9 +297,9 @@ public class RandomAccessPersistencia implements IPersistencia {
             raf.writeBoolean(borrado);
             realizado = true;
         } catch (FileNotFoundException ex) {
-            System.out.println(">> ERROR marcarBorrado");
+            System.out.println(">> ERROR marcarBorrado" + ex.getMessage());
         } catch (IOException ex) {
-            System.out.println(">> ERROR marcarBorrado");
+            System.out.println(">> ERROR marcarBorrado" + ex.getMessage());
         }
         return realizado;
     }
