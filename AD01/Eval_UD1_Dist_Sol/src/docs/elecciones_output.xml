@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<partidos>
+    <partido id="18">
+        <nombre>PP</nombre>
+    </partido>
+    <partido id="19">
+        <nombre>PSdeG</nombre>
+    </partido>
+    <partido id="3">
+        <nombre>BNG</nombre>
+    </partido>
+    <partido id="17">
+        <nombre>PODEMOS-EU-ANOVA</nombre>
+    </partido>
+    <partido id="25">
+        <nombre>VOX</nombre>
+    </partido>
+    <partido id="7">
+        <nombre>Cs</nombre>
+    </partido>
+</partidos>
