@@ -2,7 +2,7 @@ package modelo;
 // Generated 22:38:40, 2 de feb. de 2023 by Hibernate Tools 6.1.5.Final
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +12,7 @@ import java.util.Set;
 public class Emp implements java.io.Serializable {
 
 	private Integer empno;
-	private Dept dept;
+	private Departamento dept;
 	private Emp emp;
 	private String ename;
 	private String job;
@@ -25,7 +25,7 @@ public class Emp implements java.io.Serializable {
 	public Emp() {
 	}
 
-	public Emp(Dept dept, Emp emp, String ename, String job, Date hiredate, BigDecimal sal, BigDecimal comm,
+	public Emp(Departamento dept, Emp emp, String ename, String job, Date hiredate, BigDecimal sal, BigDecimal comm,
 			Set accounts, Set emps) {
 		this.dept = dept;
 		this.emp = emp;
@@ -46,11 +46,11 @@ public class Emp implements java.io.Serializable {
 		this.empno = empno;
 	}
 
-	public Dept getDept() {
+	public Departamento getDept() {
 		return this.dept;
 	}
 
-	public void setDept(Dept dept) {
+	public void setDept(Departamento dept) {
 		this.dept = dept;
 	}
 
@@ -82,8 +82,8 @@ public class Emp implements java.io.Serializable {
 		return this.hiredate;
 	}
 
-	public void setHiredate(Date hiredate) {
-		this.hiredate = hiredate;
+	public void setHiredate(Date date) {
+		this.hiredate = date;
 	}
 
 	public BigDecimal getSal() {

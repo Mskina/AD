@@ -6,7 +6,7 @@
             <column name="EMPNO"/>
             <generator class="identity"/>
         </id>
-        <many-to-one class="modelo.Dept" fetch="select" name="dept">
+        <many-to-one class="modelo.Departamento" fetch="select" name="dept">
             <column name="DEPTNO"/>
         </many-to-one>
         <many-to-one class="modelo.Emp" fetch="select" name="emp">

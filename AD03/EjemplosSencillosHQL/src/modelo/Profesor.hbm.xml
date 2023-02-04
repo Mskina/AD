@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 20:57:28, 19 de xan. de 2023 by Hibernate Tools 5.6.14.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class catalog="instituto" name="modelo.Profesor"
+		optimistic-lock="none" table="profesor">
+		<id name="id" type="java.lang.Integer">
+			<column name="Id" />
+			<generator class="identity" />
+		</id>
+		<property name="nombre" type="string">
+			<column name="nombre" not-null="true" />
+		</property>
+		<property name="ape1" type="string">
+			<column name="ape1" not-null="true" />
+		</property>
+		<property name="ape2" type="string">
+			<column name="ape2" not-null="true" />
+		</property>
+		<property name="tipoFuncionario" type="string">
+			<column length="100" name="tipoFuncionario" />
+		</property>
+
+
+	</class>
+	<query name="findAllProfesores"><![CDATA[
+
+SELECT p FROM Profesor p
+
+]]></query>
+</hibernate-mapping>

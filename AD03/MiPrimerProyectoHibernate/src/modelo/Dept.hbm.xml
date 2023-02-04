@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generated 22:38:40, 2 de feb. de 2023 by Hibernate Tools 6.1.5.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class catalog="empresa" name="modelo.Dept" optimistic-lock="none" table="DEPT">
+    <class catalog="empresa" name="modelo.Departamento" optimistic-lock="none" table="DEPT">
         <id name="deptno" type="java.lang.Integer">
             <column name="DEPTNO"/>
             <generator class="identity"/>
