@@ -45,9 +45,9 @@ public class Main {
 
 		{
 			System.out.println("----------- Q3: Uso de list() con un único dato escalar -----------");
-			List<Object[]> listDatos = session.createQuery("SELECT p.nombre FROM Profesor p").list();
-
-			for (Object datos : listDatos) {
+			List<String> listDatos = session.createQuery("SELECT p.nombre FROM Profesor p").list();
+			// String inicialmente Object
+			for (String datos : listDatos) {
 				System.out.println(datos);
 			}
 		}
@@ -79,8 +79,8 @@ public class Main {
 		{
 			int profId = 10;
 			System.out.println("----------- Q7: Uso de uniqueResult y parámetros por posición-----------");
-			Profesor profesor = (Profesor) session.createQuery("SELECT p FROM Profesor p WHERE id= ?0")
-					.setParameter(0, profId).uniqueResult();
+			Profesor profesor = (Profesor) session.createQuery("SELECT p FROM Profesor p WHERE id= ?2")
+					.setParameter(2, profId).uniqueResult();
 			System.out.println("Profesor con Id=" + profesor);
 		}
 
@@ -120,9 +120,9 @@ public class Main {
 			long numTotalObjetos = (Long) session.createQuery("SELECT count(*) FROM Profesor p").uniqueResult();
 			int numPaginas = (int) Math.ceil((double) numTotalObjetos / (double) tamanyoPagina);
 
-			System.out.println("Nº de páginas=" + numPaginas);
+			System.out.println("Numero de paginas=" + numPaginas);
 		}
-
+		System.out.println("");
 		{
 			System.out.println("-----------Q11:  Consultas con nombre definida en  -----------");
 			List<Profesor> profesores = session.getNamedQuery("findAllProfesores").list();
@@ -134,6 +134,7 @@ public class Main {
 
 		{
 			System.out.println("----------- Q12: Simple consulta con HQL -----------");
+			// No usa el nombre en bbdd, sino el de la clase Java. mapeo en el xml
 			List<Ciclo> ciclos = session.createQuery("SELECT c FROM Ciclo c ORDER BY c.nombre").list();
 
 			for (Ciclo ciclo : ciclos) {
