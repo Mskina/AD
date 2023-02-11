@@ -89,7 +89,7 @@ public class ConsultasHQL {
 			}
 		}
 		
-		System.out.println("\n>> Fin Actividad 3.2");
+		System.out.println("\n>> Fin Actividad 3.2 ");
 		
 		session.close();
 		sessionFactory.close();
