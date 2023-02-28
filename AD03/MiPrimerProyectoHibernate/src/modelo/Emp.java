@@ -1,8 +1,8 @@
 package modelo;
-// Generated 22:38:40, 2 de feb. de 2023 by Hibernate Tools 6.1.5.Final
+// Generated 16:56:32, 28 de feb. de 2023 by Hibernate Tools 6.1.5.Final
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +12,7 @@ import java.util.Set;
 public class Emp implements java.io.Serializable {
 
 	private Integer empno;
-	private Departamento dept;
+	private Dept dept;
 	private Emp emp;
 	private String ename;
 	private String job;
@@ -25,7 +25,7 @@ public class Emp implements java.io.Serializable {
 	public Emp() {
 	}
 
-	public Emp(Departamento dept, Emp emp, String ename, String job, Date hiredate, BigDecimal sal, BigDecimal comm,
+	public Emp(Dept dept, Emp emp, String ename, String job, Date hiredate, BigDecimal sal, BigDecimal comm,
 			Set accounts, Set emps) {
 		this.dept = dept;
 		this.emp = emp;
@@ -46,11 +46,11 @@ public class Emp implements java.io.Serializable {
 		this.empno = empno;
 	}
 
-	public Departamento getDept() {
+	public Dept getDept() {
 		return this.dept;
 	}
 
-	public void setDept(Departamento dept) {
+	public void setDept(Dept dept) {
 		this.dept = dept;
 	}
 
@@ -82,8 +82,8 @@ public class Emp implements java.io.Serializable {
 		return this.hiredate;
 	}
 
-	public void setHiredate(Date date) {
-		this.hiredate = date;
+	public void setHiredate(Date hiredate) {
+		this.hiredate = hiredate;
 	}
 
 	public BigDecimal getSal() {
@@ -117,13 +117,5 @@ public class Emp implements java.io.Serializable {
 	public void setEmps(Set emps) {
 		this.emps = emps;
 	}
-
-	@Override
-	public String toString() {
-		return "Emp [empno=" + empno + ", ename=" + ename + ", job=" + job + ", hiredate=" + hiredate + ", sal=" + sal
-				+ ", comm=" + comm + "]";
-	}
-	
-	
 
 }

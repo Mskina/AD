@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 22:38:40, 2 de feb. de 2023 by Hibernate Tools 6.1.5.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16:56:33, 28 de feb. de 2023 by Hibernate Tools 6.1.5.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class catalog="empresa" name="modelo.Emp" optimistic-lock="none" table="EMP">
         <id name="empno" type="java.lang.Integer">
             <column name="EMPNO"/>
             <generator class="identity"/>
         </id>
-        <many-to-one class="modelo.Departamento" fetch="select" name="dept">
+        <many-to-one class="modelo.Dept" fetch="select" name="dept">
             <column name="DEPTNO"/>
         </many-to-one>
         <many-to-one class="modelo.Emp" fetch="select" name="emp">
