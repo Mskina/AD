@@ -102,15 +102,13 @@ public class DeptWindow extends JFrame {
 
 		JListAllDepts.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		
 		JListAllDepts.setBounds(403, 37, 377, 200);
 
 		JScrollPane scrollPanel_in_JlistAllDepts = new JScrollPane(JListAllDepts);
 		scrollPanel_in_JlistAllDepts.setLocation(300, 0);
 		scrollPanel_in_JlistAllDepts.setSize(500, 250);
-		
+
 		panel.add(scrollPanel_in_JlistAllDepts);
-	
 
 		JButton btnCrearNuevoDepartamento = new JButton("Crear nuevo departamento");
 
@@ -134,31 +132,52 @@ public class DeptWindow extends JFrame {
 		ActionListener showAllDepartamentosActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getAllDepartamentos();
+
+				// Lo que se muestra en la lista es el .toString de Departamento
 			}
 		};
+
+		// Se asocia el escuchador al botón
 		btnShowAllDepts.addActionListener(showAllDepartamentosActionListener);
 
+		/**
+		 * Botón CREAR NUEVO DEPARTAMENTO
+		 */
 		ActionListener crearListener = new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
 
+				// Recupero un evento (e), busco la fuente y lo casteo a componente
+				// Aquí, el componente es el botón, entonces busco su raíz (la ventana padre)
+				// Y la casteo a JFrame, que en este caso es la ventana principal
 				JFrame owner = (JFrame) SwingUtilities.getRoot((Component) e.getSource());
+
+				// Creo un diálogo diciéndole quién es el padre y qué titulo tendrá
 				createDialog = new CreateNewDeptDialog(owner, "Crear nuevo departamento",
 						Dialog.ModalityType.DOCUMENT_MODAL, null);
+				// Modal --> No puedo interactuar con otra venta que no sea esta
 				showDialog();
 			}
 		};
+		// Ídem. Se asocia el listener al botón correspondiente
 		btnCrearNuevoDepartamento.addActionListener(crearListener);
 
+		/**
+		 * Botón MODIFICAR DEPARTAMENTO
+		 */
 		ActionListener modificarListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selectedIx = JListAllDepts.getSelectedIndex();
+				// Recuperamos qué elemento está seleccionado (el primero es 0)
+				int selectedIx = JListAllDepts.getSelectedIndex(); 
 				if (selectedIx > -1) {
+					// La lista tiene un método que permite obtener el getModel
+					// Nos permite recuperar el elemento que está en el índice seleccionado
 					Departamento departamento = (Departamento) JListAllDepts.getModel().getElementAt(selectedIx);
 					if (departamento != null) {
 
+						// Obtenemos de nuevo el propietario del diálogo que se va a abrir
 						JFrame owner = (JFrame) SwingUtilities.getRoot((Component) e.getSource());
 
+						// Creamos una instancia nueva pero aquí SÍ le pasamos un departamento
 						createDialog = new CreateNewDeptDialog(owner, "Modificar departamento",
 								Dialog.ModalityType.DOCUMENT_MODAL, departamento);
 						showDialog();
@@ -176,7 +195,8 @@ public class DeptWindow extends JFrame {
 					btnModificarDepartamento.setEnabled((selectedIx > -1));
 					btnEliminarDepartamento.setEnabled((selectedIx > -1));
 					if (selectedIx > -1) {
-						Departamento d = (Departamento) DeptWindow.this.JListAllDepts.getModel().getElementAt(selectedIx);
+						Departamento d = (Departamento) DeptWindow.this.JListAllDepts.getModel()
+								.getElementAt(selectedIx);
 						if (d != null) {
 							addMensaje(true, "Se ha seleccionado el d: " + d);
 						}
@@ -186,17 +206,22 @@ public class DeptWindow extends JFrame {
 		};
 		JListAllDepts.addListSelectionListener(selectionListListener);
 
+		/**
+		 * Botón ELIMINAR DEPARTAMENTO
+		 */
 		ActionListener deleteListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Obtenemos el íncide del elemento selecionado
 				int selectedIx = JListAllDepts.getSelectedIndex();
 				if (selectedIx > -1) {
 					Departamento d = (Departamento) JListAllDepts.getModel().getElementAt(selectedIx);
 					if (d != null) {
 						try {
+							// Si lo encuentra, llamamos a delete
 							boolean exito = departamentoServicio.delete(d.getDeptno());
 							if (exito) {
 								addMensaje(true, "Se ha eliminado el dept con id: " + d.getDeptno());
-								getAllDepartamentos();
+								getAllDepartamentos(); // Volvemos a actualizar la lista
 							}
 						} catch (exceptions.InstanceNotFoundException e1) {
 							addMensaje(true, "No se ha podido borrar el departamento. No se ha encontrado con id: "
@@ -210,6 +235,8 @@ public class DeptWindow extends JFrame {
 				}
 			}
 		};
+		
+		// Se asocia el deleteListener con su botón
 		btnEliminarDepartamento.addActionListener(deleteListener);
 	}
 
@@ -225,10 +252,13 @@ public class DeptWindow extends JFrame {
 	}
 
 	private void showDialog() {
-		createDialog.setVisible(true);
-		Departamento departamentoACrear = createDialog.getResult();
-		if (departamentoACrear != null) {
+		createDialog.setVisible(true); // Hacemos que el diálogo sea visible
 
+		// Una vez cerrado el diálogo, recuperamos el resultado del diálogo
+		Departamento departamentoACrear = createDialog.getResult();
+
+		// Si recuperó algo, lo crea o actualiza
+		if (departamentoACrear != null) {
 			saveOrUpdate(departamentoACrear);
 		}
 	}
@@ -238,7 +268,7 @@ public class DeptWindow extends JFrame {
 			Departamento nuevo = departamentoServicio.saveOrUpdate(dept);
 			if (nuevo != null) {
 				addMensaje(true, "Se ha creado/actualizado un departamento con id: " + nuevo.getDeptno());
-				getAllDepartamentos();
+				getAllDepartamentos(); // Al hacer esta llamada, actualiza la lista de la derecha
 			} else {
 				addMensaje(true, " El departamento no se ha creado/actualizado correctamente");
 			}
@@ -251,12 +281,13 @@ public class DeptWindow extends JFrame {
 	private void getAllDepartamentos() {
 		List<Departamento> departamentos = departamentoServicio.getAll();
 		addMensaje(true, "Se han recuperado: " + departamentos.size() + " departamentos");
+		// Se crea un modelo de lista por defecto
 		DefaultListModel<Departamento> defModel = new DefaultListModel<>();
 
+		// Se añaden al modelo todos los departamentos
 		defModel.addAll(departamentos);
 
+		// Al elemento visual, se le asocia el modelo creado
 		JListAllDepts.setModel(defModel);
-
 	}
-
 }
