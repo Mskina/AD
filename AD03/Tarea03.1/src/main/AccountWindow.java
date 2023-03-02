@@ -16,6 +16,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -28,7 +29,7 @@ import javax.swing.event.ListSelectionListener;
 import modelo.AccMovement;
 import modelo.Account;
 
-import modelo.Emp;
+import modelo.Empleado;
 import modelo.servicio.AccountServicio;
 
 import modelo.servicio.EmpleadoServicio;
@@ -61,7 +62,7 @@ public class AccountWindow extends JFrame {
 	private JTextField JtextFieldEmpno;
 	private JLabel lblEmpno;
 
-	private Emp empleado = null;
+	private Empleado empleado = null;
 
 	/**
 	 * Launch the application.
@@ -217,6 +218,35 @@ public class AccountWindow extends JFrame {
 
 		btnModificarImporteCuenta.addActionListener(modificarListener);
 
+		ActionListener eliminarListener = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int itemSeleccionado = JListAllAccounts.getSelectedIndex();
+				if (itemSeleccionado > -1) {
+					Account cuenta = (Account) JListAllAccounts.getModel().getElementAt(itemSeleccionado);
+					if (cuenta != null) {
+						JFrame owner = (JFrame) SwingUtilities.getRoot((Component) e.getSource());
+
+						int valor = JOptionPane.showConfirmDialog(owner, "¿Estás seguro?");
+
+						if (JOptionPane.YES_OPTION == valor) {
+							try {
+								accountServicio.delete(cuenta.getAccountno());
+								getAllAccounts();
+								addMensaje(true, "Se ha eliminado la cuenta id: " + cuenta.getAccountno());
+							} catch (InstanceNotFoundException e1) {
+								addMensaje(true, "La cuenta con ID: " + cuenta.getAccountno() + " no existe");
+							}
+						}
+					}
+				}
+			}
+
+		};
+		// Asocio botón y listener
+		btnEliminarCuenta.addActionListener(eliminarListener);
+
 		ListSelectionListener selectionListListener = new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (e.getValueIsAdjusting() == false) {
@@ -227,7 +257,7 @@ public class AccountWindow extends JFrame {
 					if (selectedIx > -1) {
 						Account accountd = (Account) JListAllAccounts.getModel().getElementAt(selectedIx);
 						if (accountd != null) {
-							addMensaje(true, "Se ha seleccionado el d: " + accountd);
+							addMensaje(true, "Se ha seleccionado la cuenta: " + accountd);
 						}
 					}
 				}
@@ -324,6 +354,7 @@ public class AccountWindow extends JFrame {
 		}
 
 	}
+
 	private void save(Account cuenta) {
 		try {
 			Account nuevo = accountServicio.saveOrUpdate(cuenta);

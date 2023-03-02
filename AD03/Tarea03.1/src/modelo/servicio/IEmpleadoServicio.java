@@ -1,9 +1,9 @@
 package modelo.servicio;
 
 import exceptions.InstanceNotFoundException;
-import modelo.Emp;
+import modelo.Empleado;
 
 public interface IEmpleadoServicio {
-	public Emp find(int id) throws InstanceNotFoundException;
+	public Empleado find(int id) throws InstanceNotFoundException;
 
 }
