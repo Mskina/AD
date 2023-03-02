@@ -24,8 +24,9 @@ public class DepartamentoServicio implements IDepartamentoServicio {
 		return departamentos;
 	}
 
-
-
+	/**
+	 * CREACIÓN o ACTUALIZACIÓN
+	 */
 	public Departamento saveOrUpdate(Departamento d) {
 		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -34,7 +35,7 @@ public class DepartamentoServicio implements IDepartamentoServicio {
 		try {
 			tx = session.beginTransaction();
 
-			session.saveOrUpdate(d);
+			session.saveOrUpdate(d); // Con la misma instrucción, se crea o actualiza
 			tx.commit();
 		} catch (Exception ex) {
 			System.out.println("Ha ocurrido una excepción en create Dept: " + ex.getMessage());
@@ -47,30 +48,34 @@ public class DepartamentoServicio implements IDepartamentoServicio {
 		}
 		return d;
 	}
-	
+
+	/**
+	 * BORRADO
+	 */
 	public boolean delete(int deptId) throws InstanceNotFoundException {
 		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
-		boolean exito=false;
+		boolean exito = false;
 
 		try {
 			tx = session.beginTransaction();
+			
+			// Intentamos obtener el departamento
 			Departamento dept = session.get(Departamento.class, deptId);
-			if(dept!=null) {
-			session.remove(dept);
+			if (dept != null) {
+				// Si lo encontramos --> lo eliminamos
+				session.remove(dept);
+			} else {
+				throw new InstanceNotFoundException(Departamento.class.getName() + " id: " + deptId);
 			}
-			else {
-				throw new InstanceNotFoundException(Departamento.class.getName() + " id: "+deptId);
-				}
 			tx.commit();
-			exito=true;
+			exito = true;
 		} catch (Exception ex) {
 			System.out.println("Ha ocurrido una excepción en create Dept: " + ex.getMessage());
 			if (tx != null) {
 				tx.rollback();
 			}
-		
 			throw ex;
 		} finally {
 			session.close();

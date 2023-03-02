@@ -26,20 +26,20 @@ public class CreateNewDeptDialog extends JDialog {
 	private JTextField textFieldUbicacion;
 	private JTextField textFieldNombreDept;
 	private JButton okButton;
-	
-	private Departamento departamentoACrearOActualizar=null;
-	
+
+	// Esta ventana será la "misma" para crear o actualizar
+	private Departamento departamentoACrearOActualizar = null;
+
+	// Una vez cerrado el diálogo, nos devuelve el resultado
 	public Departamento getResult() {
 		return this.departamentoACrearOActualizar;
 	}
-
-
 
 	/**
 	 * Create the dialog.
 	 */
 	public void initComponents() {
-		
+
 		setBounds(100, 100, 598, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -81,30 +81,33 @@ public class CreateNewDeptDialog extends JDialog {
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				departamentoACrearOActualizar=null;
-				CreateNewDeptDialog.this.dispose();
+				// Al cancelar, la variable la ponemos a null
+				departamentoACrearOActualizar = null;
 				
+				// Y se liberan los recursos que necesitase este diálogo
+				CreateNewDeptDialog.this.dispose();	
 			}
 		});
 		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
 
 		ActionListener crearBtnActionListener = new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
+				// Comprobamos que los campos de texto sean diferentes de una cadena vacía
 				if (!(textFieldUbicacion.getText().trim().equals(""))
 						&& !(textFieldNombreDept.getText().trim().equals(""))) {
-					if(departamentoACrearOActualizar==null) {
-						//Solo para creación
-						departamentoACrearOActualizar= new Departamento();
+					if (departamentoACrearOActualizar == null) {
+						// Si es null --> No existe --> Se crea
+						departamentoACrearOActualizar = new Departamento();
 					}
+					// En caso contrario, ya existe, por lo que lo actualizamos (sin espacios al final)
 					departamentoACrearOActualizar.setDname(textFieldNombreDept.getText().trim());
 					departamentoACrearOActualizar.setLoc(textFieldUbicacion.getText().trim());
-					CreateNewDeptDialog.this.dispose();
+					CreateNewDeptDialog.this.dispose(); // Liberamos recursos
 				}
 			}
 		};
-
+		// Al hacer clic en OK/Guardar, se ejecuta el evento anterior
 		this.okButton.addActionListener(crearBtnActionListener);
 
 	}
@@ -112,14 +115,11 @@ public class CreateNewDeptDialog extends JDialog {
 	public CreateNewDeptDialog(Window owner, String title, ModalityType modalityType, Departamento dept) {
 		super(owner, title, modalityType);
 		initComponents();
-		departamentoACrearOActualizar=dept;
-		if(departamentoACrearOActualizar!=null) {
+		departamentoACrearOActualizar = dept;
+		if (departamentoACrearOActualizar != null) { // Si es distinto de null estamos editando
 			textFieldNombreDept.setText(departamentoACrearOActualizar.getDname());
 			textFieldUbicacion.setText(departamentoACrearOActualizar.getLoc());
-			
 		}
 		this.setLocationRelativeTo(owner);
 	}
-	
-	
 }
