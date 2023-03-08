@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-name="cicloformativo"/>
+  <table-filter match-name="comunidadAutonoma"/>
+  <table-filter match-name="contactInfo"/>
+  <table-filter match-name="direccion"/>
+  <table-filter match-name="modulo"/>
+  <table-filter match-name="profesor"/>
+  <table-filter match-name="profesormodulo"/>
+  <table-filter match-name="provincia"/>
+  <table-filter match-name="tiposbasicos"/>
+</hibernate-reverse-engineering>
