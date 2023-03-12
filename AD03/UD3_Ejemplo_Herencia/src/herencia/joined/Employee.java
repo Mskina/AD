@@ -16,7 +16,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Employee")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Employee implements java.io.Serializable {
 
 	private static final long serialVersionUID = -7004334844129307557L;
@@ -46,7 +46,7 @@ public class Employee implements java.io.Serializable {
 	}
 
 	@Id
-	
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public Long getId() {
@@ -93,11 +93,14 @@ public class Employee implements java.io.Serializable {
 		this.email = email;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Employee { id=" + id + ", nif=" + nif + ", name=" + name + ", phone=" + phone + ", email=" + email + " }";
+		return "Employee { id=" + id + ", nif=" + nif + ", name=" + name + ", phone=" + phone + ", email=" + email
+				+ " }";
 	}
 }

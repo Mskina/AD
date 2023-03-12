@@ -14,7 +14,8 @@ public class SessionFactoryUtil {
 	 */
 	static {
 		try {
-			sessionFactory = new Configuration().configure("herencia/joined/hibernate-herencia-joined.cfg.xml").buildSessionFactory();
+			sessionFactory = new Configuration().configure("herencia/joined/hibernate-herencia-joined.cfg.xml")
+					.buildSessionFactory();
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);

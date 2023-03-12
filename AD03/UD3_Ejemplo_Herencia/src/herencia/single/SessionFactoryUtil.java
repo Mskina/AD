@@ -14,8 +14,9 @@ public class SessionFactoryUtil {
 	 */
 	static {
 		try {
-			sessionFactory = new Configuration().configure("herencia/single/hibernate-herencia-singletable.cfg.xml").buildSessionFactory();
-		sessionFactory.getProperties().get("catalog");
+			sessionFactory = new Configuration().configure("herencia/single/hibernate-herencia-singletable.cfg.xml")
+					.buildSessionFactory();
+			sessionFactory.getProperties().get("catalog");
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);

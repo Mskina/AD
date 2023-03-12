@@ -1,7 +1,5 @@
 package herencia.perClass;
 
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +15,7 @@ import javax.persistence.TableGenerator;
  */
 @Entity
 @Table(name = "Employee")
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Employee implements java.io.Serializable {
 
 	private static final long serialVersionUID = 3079536079868338480L;
@@ -45,10 +43,11 @@ public class Employee implements java.io.Serializable {
 		this.phone = phone;
 		this.email = email;
 	}
+
 //Cannot use identity column key generation with <union-subclass> mapping for: herencia.perClass.Developer
-	//Exception in thread "main" java.lang.ExceptionInInitializerError
+	// Exception in thread "main" java.lang.ExceptionInInitializerError
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	public Long getId() {
 		return this.id;
@@ -94,11 +93,14 @@ public class Employee implements java.io.Serializable {
 		this.email = email;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Employee { id=" + id + ", nif=" + nif + ", name=" + name + ", phone=" + phone + ", email=" + email + " }";
+		return "Employee { id=" + id + ", nif=" + nif + ", name=" + name + ", phone=" + phone + ", email=" + email
+				+ " }";
 	}
 }

@@ -9,7 +9,6 @@ public class Technician extends Employee {
 
 	private int experienceYears = 0;
 
-	
 	public int getExperienceYears() {
 		return experienceYears;
 	}
