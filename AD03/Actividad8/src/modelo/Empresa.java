@@ -62,7 +62,7 @@ public class Empresa implements Serializable {
 		this.telefono = telefono;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empresa")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "empresa")
 	public Set<Empleado> getEmpleados() {
 		return empleados;
 	}
