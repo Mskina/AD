@@ -185,8 +185,15 @@ public class AccountServicio implements IAccountServicio {
 			tx = session.beginTransaction();
 			Account account = session.get(Account.class, accId);
 			if (account != null) {
-				
-				
+				for (AccMovement mov : account.getAccMovementsForAccountDestId()) {
+					session.remove(mov);
+				}
+				for (AccMovement mov : account.getAccMovementsForAccountDestId()) {
+					session.remove(mov);
+				}
+				for (Empleado emp : account.getEmployees()) {
+					emp.getAccounts().remove(account);
+				}
 				session.remove(account);
 			} else {
 				throw new InstanceNotFoundException(Account.class.getName() + " id: " + accId);
