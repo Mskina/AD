@@ -222,8 +222,17 @@ public class AccountServicio implements IAccountServicio {
 
 	@Override
 	public List<Empleado> getTitularesByAccountId(int accId) throws InstanceNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Account account = session.get(Account.class, accId);
+		if (account == null) {
+			throw new InstanceNotFoundException(Account.class.getName());
+		}
+
+		List<Empleado> titulares = new ArrayList<Empleado>(account.getEmployees());
+		session.close();
+		
+		return titulares;
 	}
 
 	@Override
