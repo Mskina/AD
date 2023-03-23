@@ -218,6 +218,9 @@ public class AccountWindow extends JFrame {
 
 		btnModificarImporteCuenta.addActionListener(modificarListener);
 
+		/**
+		 * Añadido para la tarea. IMPORTANTE paso final: asociar botón y listener.
+		 */
 		ActionListener eliminarListener = new ActionListener() {
 
 			@Override
@@ -230,7 +233,7 @@ public class AccountWindow extends JFrame {
 
 						int valor = JOptionPane.showConfirmDialog(owner, "¿Estás seguro?");
 
-						if (JOptionPane.YES_OPTION == valor) {
+						if (JOptionPane.YES_OPTION == valor) { // Comparo directamente con la respuesta del diálogo
 							try {
 								accountServicio.delete(cuenta.getAccountno());
 								getAllAccounts();
@@ -244,7 +247,7 @@ public class AccountWindow extends JFrame {
 			}
 
 		};
-		// Asocio botón y listener
+		// Importante: Asocio botón y listener
 		btnEliminarCuenta.addActionListener(eliminarListener);
 
 		ListSelectionListener selectionListListener = new ListSelectionListener() {
