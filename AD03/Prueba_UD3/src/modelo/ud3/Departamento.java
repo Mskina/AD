@@ -20,7 +20,7 @@ public class Departamento implements java.io.Serializable {
 	private int deptno;
 	private String dname;
 	private String loc;
-	private Set employees = new HashSet(0);
+	private Set<Empleado> employees = new HashSet(0);
 
 	public Departamento() {
 	}
@@ -29,7 +29,7 @@ public class Departamento implements java.io.Serializable {
 		this.deptno = deptno;
 	}
 
-	public Departamento(int deptno, String dname, String loc, Set employees) {
+	public Departamento(int deptno, String dname, String loc, Set<Empleado> employees) {
 		this.deptno = deptno;
 		this.dname = dname;
 		this.loc = loc;
@@ -66,11 +66,11 @@ public class Departamento implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
-	public Set getEmployees() {
+	public Set<Empleado> getEmployees() {
 		return this.employees;
 	}
 
-	public void setEmployees(Set employees) {
+	public void setEmployees(Set<Empleado> employees) {
 		this.employees = employees;
 	}
 

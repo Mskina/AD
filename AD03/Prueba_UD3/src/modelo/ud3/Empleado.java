@@ -34,8 +34,8 @@ public class Empleado implements java.io.Serializable {
 	private LocalDate hiredate;
 	private BigDecimal sal;
 	private BigDecimal comm;
-	private Set employees = new HashSet(0);
-	private Set accounts = new HashSet(0);
+	private Set<Empleado> employees = new HashSet(0);
+	private Set<Account> accounts = new HashSet(0);
 
 	public Empleado() {
 	}
@@ -45,7 +45,7 @@ public class Empleado implements java.io.Serializable {
 	}
 
 	public Empleado(int empno, Departamento department, Empleado employee, String ename, String job, LocalDate hiredate,
-			BigDecimal sal, BigDecimal comm, Set employees, Set accounts) {
+			BigDecimal sal, BigDecimal comm, Set<Empleado> employees, Set<Account> accounts) {
 		this.empno = empno;
 		this.department = department;
 		this.employee = employee;
@@ -135,11 +135,11 @@ public class Empleado implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-	public Set getEmployees() {
+	public Set<Empleado> getEmployees() {
 		return this.employees;
 	}
 
-	public void setEmployees(Set employees) {
+	public void setEmployees(Set<Empleado> employees) {
 		this.employees = employees;
 	}
 
@@ -148,11 +148,11 @@ public class Empleado implements java.io.Serializable {
 	@JoinTable(name = "EMPLOYEE_ACCOUNT", joinColumns = {
 			@JoinColumn(name = "EMPLOYEENO", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "ACCOUNTNO", nullable = false, updatable = false) })
-	public Set getAccounts() {
+	public Set<Account> getAccounts() {
 		return this.accounts;
 	}
 
-	public void setAccounts(Set accounts) {
+	public void setAccounts(Set<Account> accounts) {
 		this.accounts = accounts;
 	}
 

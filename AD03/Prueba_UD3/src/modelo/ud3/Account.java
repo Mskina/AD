@@ -21,9 +21,9 @@ public class Account implements java.io.Serializable {
 
 	private int accountno;
 	private BigDecimal amount;
-	private Set employees = new HashSet(0);
-	private Set accMovementsForAccountDestId = new HashSet(0);
-	private Set accMovementsForAccountOriginId = new HashSet(0);
+	private Set<Empleado> employees = new HashSet(0);
+	private Set<AccMovement> accMovementsForAccountDestId = new HashSet(0);
+	private Set<AccMovement> accMovementsForAccountOriginId = new HashSet(0);
 
 	public Account() {
 	}
@@ -33,8 +33,8 @@ public class Account implements java.io.Serializable {
 		this.amount = amount;
 	}
 
-	public Account(int accountno, BigDecimal amount, Set employees, Set accMovementsForAccountDestId,
-			Set accMovementsForAccountOriginId) {
+	public Account(int accountno, BigDecimal amount, Set<Empleado> employees, Set<AccMovement> accMovementsForAccountDestId,
+			Set<AccMovement> accMovementsForAccountOriginId) {
 		this.accountno = accountno;
 		this.amount = amount;
 		this.employees = employees;
@@ -63,29 +63,29 @@ public class Account implements java.io.Serializable {
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "accounts")
-	public Set getEmployees() {
+	public Set<Empleado> getEmployees() {
 		return this.employees;
 	}
 
-	public void setEmployees(Set employees) {
+	public void setEmployees(Set<Empleado> employees) {
 		this.employees = employees;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountByAccountDestId")
-	public Set getAccMovementsForAccountDestId() {
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountDestino")
+	public Set<AccMovement> getAccMovementsForAccountDestId() {
 		return this.accMovementsForAccountDestId;
 	}
 
-	public void setAccMovementsForAccountDestId(Set accMovementsForAccountDestId) {
+	public void setAccMovementsForAccountDestId(Set<AccMovement> accMovementsForAccountDestId) {
 		this.accMovementsForAccountDestId = accMovementsForAccountDestId;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountByAccountOriginId")
-	public Set getAccMovementsForAccountOriginId() {
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountOrigen")
+	public Set<AccMovement> getAccMovementsForAccountOriginId() {
 		return this.accMovementsForAccountOriginId;
 	}
 
-	public void setAccMovementsForAccountOriginId(Set accMovementsForAccountOriginId) {
+	public void setAccMovementsForAccountOriginId(Set<AccMovement> accMovementsForAccountOriginId) {
 		this.accMovementsForAccountOriginId = accMovementsForAccountOriginId;
 	}
 
