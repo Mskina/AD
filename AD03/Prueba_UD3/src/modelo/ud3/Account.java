@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -43,7 +45,7 @@ public class Account implements java.io.Serializable {
 	}
 
 	@Id
-
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ACCOUNTNO", unique = true, nullable = false)
 	public int getAccountno() {
 		return this.accountno;

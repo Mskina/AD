@@ -237,8 +237,35 @@ public class AccountServicio implements IAccountServicio {
 
 	@Override
 	public Account addAccountToEmployee(int empno, Account acc) {
-		// TODO Auto-generated method stub
-		return null;
+		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		
+		try {			
+			Empleado empleado = session.get(Empleado.class, empno);
+			if (empleado != null) {
+				tx = session.beginTransaction();
+				
+				empleado.getAccounts().add(acc);
+				
+				session.saveOrUpdate(acc);	// opcional?
+				session.save(empleado);
+				tx.commit();
+			}
+			
+		} catch (Exception ex) {
+			System.out.println("Ha ocurrido una excepción: " + ex.getMessage());
+			if (tx != null) {
+				tx.rollback();
+			}
+			throw ex;
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		
+		return acc;		
 	}
 
 
