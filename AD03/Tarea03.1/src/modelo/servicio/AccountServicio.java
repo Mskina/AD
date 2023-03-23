@@ -130,6 +130,9 @@ public class AccountServicio implements IAccountServicio {
 //			session.close();
 //		}
 
+		// Respuesta María: Va a funcionar sin transaction, pero es bueno que os
+		// acostumbréis a usar transacciones.
+
 		return d;
 	}
 
@@ -152,12 +155,12 @@ public class AccountServicio implements IAccountServicio {
 			if (cuenta == null) {
 				throw new InstanceNotFoundException(Account.class.getName());
 			}
-			
+
 			BigDecimal transfer = BigDecimal.valueOf(cantidad);
 
 			BigDecimal saldoInicial = cuenta.getAmount();
 			BigDecimal saldoFinal = saldoInicial.add(transfer);
-			
+
 			cuenta.setAmount(saldoFinal);
 
 			tx = session.beginTransaction();
@@ -214,7 +217,7 @@ public class AccountServicio implements IAccountServicio {
 	}
 
 	/**
-	 * 8- Busca todas las cuentas del empleado y las guarda en un List 
+	 * 8- Busca todas las cuentas del empleado y las guarda en un List
 	 */
 	@Override
 	public List<Account> getAccountsByEmpno(int empno) {
@@ -222,7 +225,9 @@ public class AccountServicio implements IAccountServicio {
 		Session session = sessionFactory.openSession();
 
 		@SuppressWarnings("unchecked")
-		List<Account> cuentas = session.createQuery("select a from Account a where a.emp.empno = :empno order by a.accountno").setParameter("empno", empno).list();
+		List<Account> cuentas = session
+				.createQuery("select a from Account a where a.emp.empno = :empno order by a.accountno")
+				.setParameter("empno", empno).list();
 		session.close();
 
 		return cuentas;
