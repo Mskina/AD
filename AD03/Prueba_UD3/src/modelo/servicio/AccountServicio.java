@@ -208,8 +208,16 @@ public class AccountServicio implements IAccountServicio {
 
 	@Override
 	public List<Account> getAccountsByEmpno(int empno) {
-		// TODO Auto-generated method stub
-		return null;
+		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		@SuppressWarnings("unchecked")
+		List<Account> cuentas = session
+				.createQuery("select a from Account a join a.employees e where e.empno = :empno order by a.accountno")
+				.setParameter("empno", empno).list();
+		session.close();
+
+		return cuentas;
 	}
 
 	@Override
