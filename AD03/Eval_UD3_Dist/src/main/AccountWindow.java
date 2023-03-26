@@ -229,12 +229,13 @@ public class AccountWindow extends JFrame {
 					if (selectedIx > -1) {
 						Account accountd = (Account) JListAllAccounts.getModel().getElementAt(selectedIx);
 						if (accountd != null) {
-							addMensaje(true, "Se ha seleccionado el d: " + accountd);
+							addMensaje(true, "Se ha seleccionado la cuenta: " + accountd);
 							try {
 								List<Empleado> titulares= accountServicio.getTitularesByAccountId(accountd.getAccountno());
-								addMensaje(true, "Los titulares de la cuenta con accid: "+ accountd.getAccountno() + " son:\n");
+								addMensaje(true, "Los titulares de la cuenta con accId: "+ accountd.getAccountno() + " son:\n");
 								for (Empleado empleado : titulares) {
-									addMensaje(true, "     " +empleado.getEmpno()+"\n");
+									//addMensaje(true, "     " +empleado.getEmpno()+"\n");
+									addMensaje(true, "     " +empleado.getEmpno());
 								}
 							} catch (exceptions.InstanceNotFoundException e1) {
 								addMensaje(true, "No se ha podido encontrar la cuenta con id: "
@@ -335,7 +336,7 @@ public class AccountWindow extends JFrame {
 		createDialog.setVisible(true);
 		Account cuentaACrearOActualizar = createDialog.getResult();
 		if (cuentaACrearOActualizar != null) {
-			if (cuentaACrearOActualizar.getAccountno() != 0) {	// TODO: id 0
+			if (cuentaACrearOActualizar.getAccountno() != null) {
 				// update
 				update(cuentaACrearOActualizar, oldAmount);
 			} else

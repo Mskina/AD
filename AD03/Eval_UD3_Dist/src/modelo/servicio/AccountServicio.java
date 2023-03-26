@@ -3,7 +3,9 @@ package modelo.servicio;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -149,7 +151,6 @@ public class AccountServicio implements IAccountServicio {
 
 	}
 
-
 	public Account saveOrUpdate(Account d) {
 		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -172,9 +173,12 @@ public class AccountServicio implements IAccountServicio {
 		return d;
 	}
 
-	
-	
-	
+	/**
+	 * Modifica la implementación para que permita eliminar una cuenta y todos sus
+	 * movimientos en una transacción. Para probarlo, puedes crear movimientos
+	 * modificando previamente el importe de la cuenta a través de la interfaz
+	 * gráfica.
+	 */
 	public boolean delete(int accId) throws InstanceNotFoundException {
 		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -213,6 +217,10 @@ public class AccountServicio implements IAccountServicio {
 		return exito;
 	}
 
+	/**
+	 * Crea la consulta HQL que devuelve todas las cuentas que puede tener un
+	 * empleado. Utiliza parámetros en la consulta.
+	 */
 	@Override
 	public List<Account> getAccountsByEmpno(int empno) {
 		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
@@ -227,39 +235,49 @@ public class AccountServicio implements IAccountServicio {
 		return cuentas;
 	}
 
+	/**
+	 * Devuelve la lista de titulares de una cuenta por su id. Si no se encuentra la
+	 * cuenta, lanzará una InstanceNotFoundException
+	 */
 	@Override
 	public List<Empleado> getTitularesByAccountId(int accId) throws InstanceNotFoundException {
 		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
+
 		Account account = session.get(Account.class, accId);
+
 		if (account == null) {
 			throw new InstanceNotFoundException(Account.class.getName());
 		}
 
 		List<Empleado> titulares = new ArrayList<Empleado>(account.getEmployees());
 		session.close();
-		
+
 		return titulares;
 	}
 
+	/**
+	 * Cree una nueva cuenta asociada a un empleado. Asegúrate de crear la relación
+	 * de forma bidireccional antes de guardar los cambios. Utiliza una transacción.
+	 */
 	@Override
 	public Account addAccountToEmployee(int empno, Account acc) {
 		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
-		
-		try {			
+
+		try {
 			Empleado empleado = session.get(Empleado.class, empno);
 			if (empleado != null) {
 				tx = session.beginTransaction();
-				
+
 				empleado.getAccounts().add(acc);
-				
-				session.saveOrUpdate(acc);	// opcional?
+
+				session.saveOrUpdate(acc); // opcional?
 				session.save(empleado);
 				tx.commit();
 			}
-			
+
 		} catch (Exception ex) {
 			System.out.println("Ha ocurrido una excepción: " + ex.getMessage());
 			if (tx != null) {
@@ -271,9 +289,9 @@ public class AccountServicio implements IAccountServicio {
 				session.close();
 			}
 		}
-		
-		return acc;		
-	}
 
+		return acc;
+
+	}
 
 }
