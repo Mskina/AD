@@ -142,8 +142,8 @@ public class EmpleadoNeoDatisDao extends AbstractGenericDao<Empleado> implements
 
 		try {
 			// Intentamos obtener todos los objetos Empleado y los listamos
-			Objects<Empleado> objects = this.dataSource.getObjects(Empleado.class);
-			lista = Utils.toList(objects);
+			Objects<Empleado> empleados = this.dataSource.getObjects(Empleado.class);
+			lista = Utils.toList(empleados);
 		} catch (Exception ex) {
 			System.err.println("Ha ocurrido una excepción en findAll: " + ex.getMessage());
 		}
@@ -153,19 +153,21 @@ public class EmpleadoNeoDatisDao extends AbstractGenericDao<Empleado> implements
 
 	/**
 	 * Método que devuelve todos los empleados que tengan el mismo empleo
+	 * 
+	 * Inicialmente el parámetro era "job". En la solución está "puesto"
 	 */
 	@Override
-	public List<Empleado> findByJob(String job) {
+	public List<Empleado> findByJob(String puesto) {
 		// Creamos una lista
 		List<Empleado> lista = null;
 
 		try {
-			// Consulta que busca un match entre "job" de Empleado y job del parámetro
-			IQuery query = new CriteriaQuery(Empleado.class, Where.equal("job", job));
+			// Consulta que busca un match entre "job" de Empleado y puesto del parámetro
+			IQuery query = new CriteriaQuery(Empleado.class, Where.equal("job", puesto));
 
 			// Intentamos obtener todos los Empleado que cumplan la consulta
-			Objects<Empleado> objects = this.dataSource.getObjects(query);
-			lista = Utils.toList(objects);
+			Objects<Empleado> empleados = this.dataSource.getObjects(query);
+			lista = Utils.toList(empleados);
 		} catch (Exception ex) {
 			System.err.println("Ha ocurrido una excepción en findByJob: " + ex.getMessage());
 		}
@@ -209,8 +211,8 @@ public class EmpleadoNeoDatisDao extends AbstractGenericDao<Empleado> implements
 		    IQuery query = new CriteriaQuery(Empleado.class, criterio);
 
 			// Intentamos obtener todos los Empleado que cumplan la condición
-			Objects<Empleado> objects = this.dataSource.getObjects(query);
-			lista = Utils.toList(objects);
+			Objects<Empleado> empleados = this.dataSource.getObjects(query);
+			lista = Utils.toList(empleados);
 		} catch (Exception ex) {
 			System.err.println("Ha ocurrido una excepción en findEmployeesByHireDate: " + ex.getMessage());
 		}
