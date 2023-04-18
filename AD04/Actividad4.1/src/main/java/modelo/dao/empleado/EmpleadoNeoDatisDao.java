@@ -12,15 +12,22 @@ import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBRuntimeException;
 import org.neodatis.odb.OID;
 import org.neodatis.odb.ObjectValues;
+import org.neodatis.odb.Objects;
 import org.neodatis.odb.Values;
 import org.neodatis.odb.core.oid.OIDFactory;
+import org.neodatis.odb.core.query.IQuery;
 import org.neodatis.odb.core.query.IValuesQuery;
+import org.neodatis.odb.core.query.criteria.And;
+import org.neodatis.odb.core.query.criteria.ICriterion;
+import org.neodatis.odb.core.query.criteria.Where;
+import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
 
 import modelo.Empleado;
 import modelo.dao.AbstractGenericDao;
 import modelo.exceptions.InstanceNotFoundException;
 import util.ConnectionFactory;
+import util.Utils;
 
 /**
  *
@@ -39,7 +46,6 @@ public class EmpleadoNeoDatisDao extends AbstractGenericDao<Empleado> implements
 		OID oid = null;
 		long oidlong = -1;
 		try {
-
 			oid = this.dataSource.store(entity);
 			this.dataSource.commit();
 
@@ -103,34 +109,113 @@ public class EmpleadoNeoDatisDao extends AbstractGenericDao<Empleado> implements
 		return media.floatValue();
 	}
 
+	/**
+	 * CRUD - Delete
+	 * 
+	 * Genérico. Debemos leer un objeto guardado y, a continuación, lo eliminamos
+	 * con la ayuda de métodos.
+	 * 
+	 * Método que elimina un Empleado dentro de una transacción. Devuelve true si se
+	 * ha eliminado y false en caso contrario
+	 */
 	@Override
 	public boolean delete(Empleado entity) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean exito = false;
+		try {
+			this.dataSource.delete(entity);
+			this.dataSource.commit(); // En los apuntes no está, pero sí en los otros métodos
+			exito = true;
+		} catch (Exception ex) {
+			System.err.println("Ha ocurrido una excepción en delete: " + ex.getMessage());
+			this.dataSource.rollback();
+		}
+		return exito;
 	}
 
+	/**
+	 * Método que devuelve una lista de todos los empleados
+	 */
 	@Override
 	public List<Empleado> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		// Creamos una lista
+		List<Empleado> lista = null;
+
+		try {
+			// Intentamos obtener todos los objetos Empleado y los listamos
+			Objects<Empleado> objects = this.dataSource.getObjects(Empleado.class);
+			lista = Utils.toList(objects);
+		} catch (Exception ex) {
+			System.err.println("Ha ocurrido una excepción en findAll: " + ex.getMessage());
+		}
+
+		return lista;
 	}
 
+	/**
+	 * Método que devuelve todos los empleados que tengan el mismo empleo
+	 */
 	@Override
 	public List<Empleado> findByJob(String job) {
-		// TODO Auto-generated method stub
-		return null;
+		// Creamos una lista
+		List<Empleado> lista = null;
+
+		try {
+			// Consulta que busca un match entre "job" de Empleado y job del parámetro
+			IQuery query = new CriteriaQuery(Empleado.class, Where.equal("job", job));
+
+			// Intentamos obtener todos los Empleado que cumplan la consulta
+			Objects<Empleado> objects = this.dataSource.getObjects(query);
+			lista = Utils.toList(objects);
+		} catch (Exception ex) {
+			System.err.println("Ha ocurrido una excepción en findByJob: " + ex.getMessage());
+		}
+
+		return lista;
 	}
 
+	/**
+	 * Devuelve true si ya existe un empleado con ese empno
+	 */
 	@Override
 	public boolean exists(Integer empno) {
-		// TODO Auto-generated method stub
-		return false;
+
+		// Consulta en la que field devuelve la columna de empno
+		// Con Where.equal filtramos los valores "empno" que coincidan con el parámetro
+		// recibido
+		IValuesQuery query = new ValuesCriteriaQuery(Empleado.class, Where.equal("empno", empno)).field("empno");
+
+		// Realizamos la consulta
+		Values values = this.dataSource.getValues(query);
+
+		// Se niega para que cumpla true = existe (si está Empty --> NO existe)
+		return !values.isEmpty();
 	}
 
+	/**
+	 * Devuelve todos los empleados contratados entre las fechas recibidas (incluidas)
+	 */
 	@Override
 	public List<Empleado> findEmployeesByHireDate(Date from, Date to) {
-		// TODO Auto-generated method stub
-		return null;
+		// Creamos una lista
+		List<Empleado> lista = null;
+
+		try {			
+			// Criterio de búsqueda con And (se deben cumplir ambos criterios) comaprando con hiredate
+			// ge (greater-equal, mayor o igual) que la fecha from de parámetro
+			// le (lesser-equal, menor o igual) que la fecha to de parámetro
+			ICriterion criterio = new And().add(Where.ge("hiredate", from)).add(Where.le("hiredate", to));
+
+			// Creo la consulta y le paso el criterio de búsqueda
+		    IQuery query = new CriteriaQuery(Empleado.class, criterio);
+
+			// Intentamos obtener todos los Empleado que cumplan la condición
+			Objects<Empleado> objects = this.dataSource.getObjects(query);
+			lista = Utils.toList(objects);
+		} catch (Exception ex) {
+			System.err.println("Ha ocurrido una excepción en findEmployeesByHireDate: " + ex.getMessage());
+		}
+
+		return lista;
 	}
 
 }

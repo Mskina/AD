@@ -13,7 +13,6 @@ public class Utils {
 		cal.set(year, month, day, 0, 0, 0);
 		Date date = cal.getTime();
 		return date;
-
 	}
 
 	// https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#target_types
@@ -25,6 +24,4 @@ public class Utils {
 		}
 		return empList;
 	}
-
-
 }

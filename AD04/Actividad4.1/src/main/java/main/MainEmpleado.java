@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import modelo.Empleado;
-import modelo.exceptions.DuplicateInstanceException;
 import modelo.exceptions.InstanceNotFoundException;
 import modelo.servicio.empleado.ServicioEmpleado;
 import modelo.servicio.empleado.IServicioEmpleado;
@@ -13,8 +12,6 @@ import util.ConnectionFactory;
 import util.Utils;
 
 public class MainEmpleado {
-	
-	
 
 	private static IServicioEmpleado empleadoServicio = new ServicioEmpleado();
 
@@ -43,7 +40,7 @@ public class MainEmpleado {
 		if (actualizado != null) {
 			eliminarEmpleado(actualizado);
 		}
-		
+
 		ConnectionFactory.closeConnection();
 
 	}
@@ -70,7 +67,7 @@ public class MainEmpleado {
 
 			for (Empleado empleado : empleados) {
 				empleadoServicio.createEmpleado(empleado);
-			
+
 			}
 
 		} catch (Exception e) {
