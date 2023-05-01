@@ -6,53 +6,49 @@ package modelo;
  */
 public class Departamento implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Integer deptno;
-	private String dname;
-	private String loc;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    private Integer deptno;
+    private String dname;
+    private String loc;
 
-	public Departamento() {
-	}
+    public Departamento() {
+    }
 
-	public Departamento(String dname, String loc) {
-		this.dname = dname;
-		this.loc = loc;	
-	}
+    public Departamento(String dname, String loc) {
+        this.dname = dname;
+        this.loc = loc;
+    }
 
-	public Integer getDeptno() {
-		return this.deptno;
-	}
+    public Integer getDeptno() {
+        return this.deptno;
+    }
 
-	public void setDeptno(Integer deptno) {
-		this.deptno = deptno;
-	}
+    public void setDeptno(Integer deptno) {
+        this.deptno = deptno;
+    }
 
-	public String getDname() {
-		return this.dname;
-	}
+    public String getDname() {
+        return this.dname;
+    }
 
-	public void setDname(String dname) {
-		this.dname = dname;
-	}
+    public void setDname(String dname) {
+        this.dname = dname;
+    }
 
-	public String getLoc() {
-		return this.loc;
-	}
+    public String getLoc() {
+        return this.loc;
+    }
 
-	public void setLoc(String loc) {
-		this.loc = loc;
-	}
+    public void setLoc(String loc) {
+        this.loc = loc;
+    }
 
-
-
-	@Override
-	public String toString() {
-		return "Departamento [deptno=" + ( (deptno!=null)? deptno : " ") + ", dname=" + dname + ", loc=" + loc + "]";
-	}
-	
-	
+    @Override
+    public String toString() {
+        return "Departamento [deptno=" + ((deptno != null) ? deptno : " ") + ", dname=" + dname + ", loc=" + loc + "]";
+    }
 
 }
