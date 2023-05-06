@@ -149,6 +149,7 @@ public class CreateNewDeptDialog extends JDialog {
             textFieldNombreDept.setText(departamentoACrearOActualizar.getDname());
             textFieldUbicacion.setText(departamentoACrearOActualizar.getLoc());
             textFieldDeptno.setText(String.valueOf(departamentoACrearOActualizar.getDeptno()));
+            //textFieldDeptno.setEditable(false); // Evito que se pueda cambiar el número de departamento
         }
         lblError.setVisible(false);
         this.setLocationRelativeTo(owner);

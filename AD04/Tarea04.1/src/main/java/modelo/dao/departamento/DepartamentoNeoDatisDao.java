@@ -117,8 +117,8 @@ public class DepartamentoNeoDatisDao extends AbstractGenericDao<Departamento> im
 
         try {
             // Intentamos obtener todos los objetos Departamento y los listamos
-            Objects<Departamento> departamento = this.dataSource.getObjects(Departamento.class);
-            lista = Utils.toList(departamento);
+            Objects<Departamento> departamentos = this.dataSource.getObjects(Departamento.class);
+            lista = Utils.toList(departamentos);
         } catch (Exception ex) {
             System.err.println("Ha ocurrido una excepción en findAll: " + ex.getMessage());
         }

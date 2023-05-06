@@ -156,7 +156,9 @@ public class DeptWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int selectedIx = JListAllDepts.getSelectedIndex();
                 if (selectedIx > -1) {
+                    
                     Departamento departamento = (Departamento) JListAllDepts.getModel().getElementAt(selectedIx);
+                    
                     if (departamento != null) {
 
                         JFrame owner = (JFrame) SwingUtilities.getRoot((Component) e.getSource());
@@ -242,17 +244,11 @@ public class DeptWindow extends JFrame {
                     ex.printStackTrace();
                 }
             } else if (createDialog.getTipo() == TIPO_EDICION.EDITAR) {
-                // TO DO
-                // Completa el método showDialog de DeptWindow.java para que llame a los métodos
-                // del servicio create o update en función de si se ha creado o editado el
-                // departamento.
-                // UPDATE
                 try {
                     boolean exito = departamentoServicio.update(departamentoACrear);
                     if (exito) {
-                        addMensaje(true, "El departamento " + departamentoACrear.getDeptno() + " se ha actualizado correctamente.");                        
+                        addMensaje(true, "El departamento " + departamentoACrear.getDeptno() + " se ha actualizado correctamente.");
                     }
-
                 } catch (Exception ex) {
                     addMensaje(true, "Ha ocurrido un error y no se ha podido actualizar el departamento.");
                     System.out.println("Exception: " + ex.getMessage());

@@ -23,7 +23,7 @@ public interface IServicioDepartamento {
     public long create(Departamento dept) throws DuplicateInstanceException;
 
     public boolean delete(Departamento dept);
-
+    
     public boolean update(Departamento dept);
 
     public List<Departamento> findAll();
