@@ -16,8 +16,10 @@ import es.teis.exist.util.MyDataSource;
 public class RetrieveExample {
 
 	/**
-	 * args[0] Should be the name of the collection to access args[1] Should be the
-	 * name of the resource to read from the collection
+	 * args[0] Should be the name of the collection to access
+	 * 
+	 * args[1] Should be the name of the resource to read from the collection
+	 * 
 	 */
 	public static void main(String args[]) throws Exception {
 

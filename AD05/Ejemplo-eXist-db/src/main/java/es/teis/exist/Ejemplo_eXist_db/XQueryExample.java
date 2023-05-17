@@ -17,8 +17,10 @@ import es.teis.exist.util.MyDataSource;
 public class XQueryExample {
 
 	/**
-	 * args[0] Should be the name of the collection to access args[1] Should be the
-	 * XQuery to execute
+	 * args[0] Should be the name of the collection to access.
+	 * 
+	 * args[1] Should be the XQuery to execute
+	 * 
 	 */
 	public static void main(String args[]) throws Exception {
 
@@ -33,9 +35,11 @@ public class XQueryExample {
 
 		MyDataSource dataSource = ConnectionManager.getDataSource();
 
+		// Registramos el controlador de la base de datos
 		Class cl = Class.forName(dataSource.getDriver());
 		Database database = (Database) cl.newInstance();
 		database.setProperty("create-database", "true");
+		// Hemos creado la base de datos si no existe
 
 		DatabaseManager.registerDatabase(database);
 
@@ -45,6 +49,7 @@ public class XQueryExample {
 			XQueryService xqs = (XQueryService) col.getService("XQueryService", "1.0");
 			xqs.setProperty("indent", "yes");
 
+			// Ejecución de la consulta XQuery
 			CompiledExpression compiled = xqs.compile(args[1]);
 			ResourceSet result = xqs.execute(compiled);
 			ResourceIterator i = result.getIterator();

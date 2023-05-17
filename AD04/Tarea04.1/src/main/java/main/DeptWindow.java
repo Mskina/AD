@@ -234,8 +234,12 @@ public class DeptWindow extends JFrame {
 
             if (createDialog.getTipo() == TIPO_EDICION.CREAR) {
                 try {
-                    departamentoServicio.create(departamentoACrear);
-                    addMensaje(true, "El departamento " + departamentoACrear.getDeptno() + " se ha creado correctamente");
+                    long id = departamentoServicio.create(departamentoACrear);
+                    if (id != -1) {
+                        addMensaje(true, "El departamento " + departamentoACrear.getDeptno() + " se ha creado correctamente");
+                    } else {
+                        addMensaje(true, "ERROR: El departamento no se ha podido crear");
+                    }
                 } catch (DuplicateInstanceException die) {
                     addMensaje(true, die.getMessage());
                 } catch (Exception ex) {

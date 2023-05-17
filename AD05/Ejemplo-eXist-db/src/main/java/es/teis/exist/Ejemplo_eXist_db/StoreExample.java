@@ -18,7 +18,9 @@ public class StoreExample {
 
 	/**
 	 * args[0] Should be the name of the collection to access: books or books/gal
+	 * 
 	 * args[1] Should be the name of the file to read and store in the collection
+	 * 
 	 */
 	public static void main(String args[]) throws Exception {
 
@@ -40,9 +42,13 @@ public class StoreExample {
 		try {
 			col = getOrCreateCollection(args[0], dataSource);
 
-			// create new XMLResource; an id will be assigned to the new resource
-			// Si se le pasa null como primer argumento, indica que se le asignará un
-			// identificador cuando se cree el documento
+			/**
+			 * create new XMLResource; an id will be assigned to the new resource
+			 * 
+			 * Si se le pasa null como primer argumento, se le asignará un identificador al
+			 * crear el documento
+			 * 
+			 */
 			res = (XMLResource) col.createResource(args[1], "XMLResource");
 			File f = new File(args[1]);
 
