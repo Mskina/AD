@@ -307,7 +307,7 @@ public class DepartamentoEXistDao extends AbstractGenericDao<Departamento> imple
 	public boolean delete(Departamento entity) {
 		boolean exito = false;
 
-		/**
+		/*
 		 * Recupero el id del Departamento para usarlo en la consulta. Se podría hacer
 		 * directamente en la propia consulta, como se hace en update()
 		 */

@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Built-By: maria
+Build-Jdk: 17.0.4.1
+Created-By: Maven Integration for Eclipse
+Name: es/teis/beans/BeanFuente.class
+Java-Bean: True
+
+Name: es/teis/beans/BeanReceptor.class
+Java-Bean: True
+
+Name: es/teis/beans/VetoableBeanReceptor.class
+Java-Bean: True
+
+Name: es/teis/beans/VetoableBeanFuente.class
+Java-Bean: True
+
