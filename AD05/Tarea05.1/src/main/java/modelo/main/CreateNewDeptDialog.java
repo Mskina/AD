@@ -29,7 +29,7 @@ public class CreateNewDeptDialog extends JDialog {
 	private JButton okButton;
 	private JLabel lblError;
 	private Departamento departamentoACrearOActualizar = null;
-	
+
 	private JLabel lblId;
 
 	public Departamento getResult() {
@@ -76,7 +76,7 @@ public class CreateNewDeptDialog extends JDialog {
 		textFieldNombreDept.setBounds(330, 35, 197, 23);
 		contentPanel.add(textFieldNombreDept);
 
-		 lblId= new JLabel("Dept. no");
+		lblId = new JLabel("Dept. no");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblId.setBounds(39, 135, 140, 24);
 		contentPanel.add(lblId);
@@ -156,7 +156,7 @@ public class CreateNewDeptDialog extends JDialog {
 
 			// No permitir cambio de deptno en edición
 			textFieldDeptno.setVisible(tipo != TIPO_EDICION.EDITAR);
-			lblId.setVisible(tipo !=TIPO_EDICION.EDITAR);
+			lblId.setVisible(tipo != TIPO_EDICION.EDITAR);
 
 		}
 		lblError.setVisible(false);

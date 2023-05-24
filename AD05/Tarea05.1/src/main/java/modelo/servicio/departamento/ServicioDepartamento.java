@@ -18,8 +18,21 @@ public class ServicioDepartamento implements IServicioDepartamento {
 
 	@Override
 	public boolean create(Departamento dept) throws DuplicateInstanceException {
-		
-			return departamentoDao.create(dept);		
+
+		boolean encontrado = false;
+
+		try {
+			read(dept.getDeptno());
+			encontrado = true;
+		} catch (InstanceNotFoundException infex) {
+		}
+
+		if (encontrado) {
+			throw new DuplicateInstanceException("El departamento ya existe", dept.getDeptno(),
+					Departamento.class.getName());
+		}
+
+		return departamentoDao.create(dept);
 
 	}
 
@@ -37,8 +50,6 @@ public class ServicioDepartamento implements IServicioDepartamento {
 	public List<Departamento> findAll() {
 		return departamentoDao.findAll();
 	}
-
-	
 
 	@Override
 	public Departamento read(long deptno) throws InstanceNotFoundException {

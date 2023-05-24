@@ -17,14 +17,13 @@ public class Departamento implements java.io.Serializable {
 	private String dname;
 	private String loc;
 
-
 	public Departamento() {
 	}
 
 	public Departamento(String dname, String loc) {
 		this.dname = dname;
 		this.loc = loc;
-		
+
 	}
 
 	public Integer getDeptno() {
@@ -51,13 +50,9 @@ public class Departamento implements java.io.Serializable {
 		this.loc = loc;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "Departamento [deptno=" + ( (deptno!=null)? deptno : " ") + ", dname=" + dname + ", loc=" + loc + "]";
+		return "Departamento [deptno=" + ((deptno != null) ? deptno : " ") + ", dname=" + dname + ", loc=" + loc + "]";
 	}
-	
-	
 
 }

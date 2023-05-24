@@ -16,7 +16,6 @@ public class ConnectionManager {
 	private static final String COL_DEPTS_KEY = "coleccionDepartamentos";
 
 	private static MyDataSource datasource = null;
-	
 
 	private ConnectionManager() {
 
@@ -34,11 +33,8 @@ public class ConnectionManager {
 				String col_depts = properties.getProperty(COL_DEPTS_KEY);
 
 				datasource = new MyDataSource(user, pwd, url, driver);
-				
+
 				datasource.setColeccionDepartamentos(col_depts);
-				
-
-
 
 			} catch (FileNotFoundException e) {
 				System.err.println("Ha ocurrido una excepción FileNotFound: " + e.getMessage());
@@ -54,9 +50,5 @@ public class ConnectionManager {
 		return datasource;
 
 	}
-
-	
-	
-	
 
 }

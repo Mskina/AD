@@ -4,7 +4,6 @@
  */
 package modelo.dao.departamento;
 
-
 import modelo.Departamento;
 import modelo.dao.IGenericDao;
 
@@ -12,12 +11,6 @@ import modelo.dao.IGenericDao;
  *
  * @author mfernandez
  */
-public interface IDepartamentoDao extends IGenericDao<Departamento>{
-    
+public interface IDepartamentoDao extends IGenericDao<Departamento> {
 
-	
-	
-	
-	
-	
 }
